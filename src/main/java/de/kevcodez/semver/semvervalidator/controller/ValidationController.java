@@ -2,8 +2,6 @@ package de.kevcodez.semver.semvervalidator.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,20 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.zafarkhaja.semver.ParseException;
 import com.github.zafarkhaja.semver.Version;
-
 import de.kevcodez.semver.semvervalidator.dto.ValidationRequestDto;
 import de.kevcodez.semver.semvervalidator.dto.ValidationResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/validate")
-@EnableAutoConfiguration
 @Api("Endpoint to validate versions against a version range, according to semver.org specification.")
 public class ValidationController {
 
-    @GetMapping("/validate/{version}/inRange/{versionRange}")
+    @GetMapping("/{version}/inRange/{versionRange}")
     @ApiOperation("Validate a single version against a version range.")
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "Result, whether the given version is in the given version range.", response = Boolean.class),
+        @ApiResponse(code = 400, message = "Invalid version.")
+    })
     ResponseEntity<?> isVersionInRange(@PathVariable String version, @PathVariable String versionRange) {
         try {
             Version semanticVersion = Version.valueOf(version);
@@ -44,6 +46,9 @@ public class ValidationController {
 
     @PostMapping
     @ApiOperation("Validate a list of versions against a version range.")
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "List of versions and whether they match or not.", response = ValidationResponseDto.class),
+    })
     ResponseEntity<?> versionsInRange(@Valid @RequestBody ValidationRequestDto validationRequestDto) {
         String versionRange = validationRequestDto.getVersionRange();
 
@@ -65,7 +70,4 @@ public class ValidationController {
         return new ResponseEntity<>(validationResponseDto, HttpStatus.OK);
     }
 
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(ValidationController.class, args);
-    }
 }
