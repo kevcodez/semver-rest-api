@@ -53,6 +53,7 @@ public class ValidationController {
         String versionRange = validationRequestDto.getVersionRange();
 
         ValidationResponseDto validationResponseDto = new ValidationResponseDto();
+        validationResponseDto.setVersionRange(validationRequestDto.getVersionRange());
 
         for (String version : validationRequestDto.getVersionsToValidate()) {
             try {
@@ -67,7 +68,7 @@ public class ValidationController {
             }
         }
 
-        return new ResponseEntity<>(validationResponseDto, HttpStatus.OK);
+        return ResponseEntity.ok(validationResponseDto);
     }
 
 }
