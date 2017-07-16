@@ -1,5 +1,5 @@
 # semver-rest-api
-Spring Boot Service that offers a REST API for semantic versioning, built on [Java SemVer](https://github.com/zafarkhaja/jsemver).
+Spring Boot Service written in Kotlin that offers a REST API for semantic versioning, built on [Java SemVer](https://github.com/zafarkhaja/jsemver).
 
 [![Build Status](https://travis-ci.org/kevcodez/semver-rest-api.svg?branch=master)](https://travis-ci.org/kevcodez/semver-rest-api)
 
