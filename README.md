@@ -57,9 +57,13 @@ POST /validate
 }
 ```
 
-GET /validate/1.0.0/inRange/^1.0.0
+----
 
-`true`
+GET /validate/1.0.0/inRange/^1.0.0
+=> *200 OK* `true`
+
+GET /validate/2.0.0/inRange/^1.0.0
+=> *200 OK* `false`
 
 ### Increment versions
 
