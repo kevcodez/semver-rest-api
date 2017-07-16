@@ -1,11 +1,23 @@
 # semver-rest-api
+
 Spring Boot Service written in Kotlin that offers a REST API for semantic versioning, built on [Java SemVer](https://github.com/zafarkhaja/jsemver).
 
 [![Build Status](https://travis-ci.org/kevcodez/semver-rest-api.svg?branch=master)](https://travis-ci.org/kevcodez/semver-rest-api)
-
 [![Coverage Status](https://coveralls.io/repos/github/kevcodez/semver-rest-api/badge.svg)](https://coveralls.io/github/kevcodez/semver-rest-api)
 
-## Version information
+## Installation
+
+```
+git clone
+mvn clean install -DskipTests
+java -jar ./target/semver-rest-api.jar
+```
+
+Visit http://localhost:8080/swagger-ui.html for REST API documentation.
+
+## API
+
+### Version information
 
 GET /info/2.1.0-beta
 
@@ -19,7 +31,7 @@ GET /info/2.1.0-beta
 }
 ```
 
-## Version range validation
+### Version range validation
 
 POST /validate
 
@@ -47,7 +59,7 @@ POST /validate
 }
 ```
 
-## Increment versions
+### Increment versions
 
 The API offers endpoints to increment major, minor, patch, build metadata and pre release version.
 
@@ -62,6 +74,6 @@ GET /increment/major/1.0.0
 }
 ```
 
-## API documentation
+### API documentation
 
 The API is documented using Swagger. You can access the Swagger-UI on /swagger-ui.html.
