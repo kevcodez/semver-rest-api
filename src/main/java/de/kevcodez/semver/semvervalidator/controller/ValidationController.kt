@@ -56,7 +56,6 @@ class ValidationController {
             } catch (exc: ParseException) {
                 validationResponseDto.addValidation(version, false)
             }
-
         }
 
         return ResponseEntity.ok(validationResponseDto)

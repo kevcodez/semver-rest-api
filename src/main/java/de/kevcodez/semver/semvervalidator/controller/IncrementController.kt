@@ -12,56 +12,50 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/increment")
+@RequestMapping("increment")
 @Api("Endpoint to increment versions.")
 class IncrementController {
 
     @Autowired
     lateinit var versionConverter: VersionConverter;
 
-    @GetMapping("/major/{version}/")
+    @GetMapping("major/{version:.+}")
     @ApiOperation("Increments major version of the given version.")
     @ApiResponses(ApiResponse(code = 200, message = "Incremented version.", response = VersionDto::class), ApiResponse(code = 400, message = "Invalid version."))
-    internal fun incrementMajorVersion(version: String): ResponseEntity<*> {
+    internal fun incrementMajorVersion(@PathVariable version: String): ResponseEntity<*> {
         return incrementVersion(version, { it.incrementMajorVersion() })
     }
 
-    @GetMapping("/minor/{version}/")
+    @GetMapping("minor/{version:.+}")
     @ApiOperation("Increments minor version of the given version.")
     @ApiResponses(ApiResponse(code = 200, message = "Incremented version.", response = VersionDto::class), ApiResponse(code = 400, message = "Invalid version."))
-    internal fun incrementMinorVersion(version: String): ResponseEntity<*> {
+    internal fun incrementMinorVersion(@PathVariable version: String): ResponseEntity<*> {
         return incrementVersion(version, { it.incrementMinorVersion() })
     }
 
-    @GetMapping("/patch/{version}/")
+    @GetMapping("patch/{version:.+}")
     @ApiOperation("Increments patch version of the given version.")
     @ApiResponses(ApiResponse(code = 200, message = "Incremented version.", response = VersionDto::class), ApiResponse(code = 400, message = "Invalid version."))
-    internal fun incrementPatchVersion(version: String): ResponseEntity<*> {
+    internal fun incrementPatchVersion(@PathVariable version: String): ResponseEntity<*> {
         return incrementVersion(version, { it.incrementPatchVersion() })
     }
 
-    @GetMapping("/buildMetadata/{version}/")
-    @ApiOperation("Increments build metadata version of the given version.")
-    @ApiResponses(ApiResponse(code = 200, message = "Incremented version.", response = VersionDto::class), ApiResponse(code = 400, message = "Invalid version."))
-    internal fun incrementBuildMetadataVersion(version: String): ResponseEntity<*> {
-        return incrementVersion(version, { it.incrementBuildMetadata() })
-    }
-
-    @GetMapping("/preRelease/{version}/")
+    @GetMapping("preRelease/{version:.+}")
     @ApiOperation("Increments pre release version of the given version.")
     @ApiResponses(ApiResponse(code = 200, message = "Incremented version.", response = VersionDto::class), ApiResponse(code = 400, message = "Invalid version."))
-    internal fun incrementPreReleaseVersion(version: String): ResponseEntity<*> {
+    internal fun incrementPreReleaseVersion(@PathVariable version: String): ResponseEntity<*> {
         return incrementVersion(version, { it.incrementPreReleaseVersion() })
     }
 
-    private fun incrementVersion(version: String, function: (Version) -> Version): ResponseEntity<*> {
+    private fun incrementVersion(version: String, functionIncrement: (Version) -> Version): ResponseEntity<*> {
         try {
             val semanticVersion = Version.valueOf(version)
-            val incrementedVersion = function(semanticVersion)
+            val incrementedVersion = functionIncrement(semanticVersion)
             val versionDto = versionConverter.convertToDto(incrementedVersion)
 
             return ResponseEntity.ok(versionDto)
