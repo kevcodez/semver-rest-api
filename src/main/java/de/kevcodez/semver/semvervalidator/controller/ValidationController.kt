@@ -15,11 +15,11 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/validate")
+@RequestMapping("validate")
 @Api("Endpoint to validate versions against a version range, according to semver.org specification.")
 class ValidationController {
 
-    @GetMapping("/{version}/inRange/{versionRange}")
+    @GetMapping("{version:.+}/inRange/{versionRange:.+}")
     @ApiOperation("Validate a single version against a version range.")
     @ApiResponses(
             ApiResponse(code = 200, message = "Result, whether the given version is in the given version range.", response = Boolean::class),
@@ -34,7 +34,6 @@ class ValidationController {
         } catch (exc: ParseException) {
             return ResponseEntity(exc.localizedMessage, HttpStatus.BAD_REQUEST)
         }
-
     }
 
     @PostMapping
@@ -49,7 +48,6 @@ class ValidationController {
         for (version in validationRequestDto.versionsToValidate) {
             try {
                 val semanticVersion = Version.valueOf(version)
-
                 val satisfied = semanticVersion.satisfies(versionRange)
 
                 validationResponseDto.addValidation(version, satisfied)

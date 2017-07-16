@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/info")
+@RequestMapping("info")
 @Api("Endpoint to retrieve information about a version.")
 class VersionInfoController {
 
