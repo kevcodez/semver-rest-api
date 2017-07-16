@@ -57,9 +57,13 @@ POST /validate
 }
 ```
 
+GET /validate/1.0.0/inRange/^1.0.0
+
+`true`
+
 ### Increment versions
 
-The API offers endpoints to increment major, minor, patch, build metadata and pre release version.
+The API offers endpoints to increment major, minor, patch and pre release version.
 
 GET /increment/major/1.0.0
 
