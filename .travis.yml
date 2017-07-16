@@ -7,5 +7,5 @@ cache:
   - $HOME/.m2
   - bundler
   - packages
-after_success:
+script:
   - mvn clean install jacoco:report coveralls:report -DrepoToken=$COVERALLS_REPO_TOKEN
