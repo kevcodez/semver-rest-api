@@ -5,5 +5,7 @@ install: mvn dependency:resolve
 cache:
   directories:
   - $HOME/.m2
+  - bundler
+  - packages
 after_success:
   - mvn clean install jacoco:report coveralls:report -DrepoToken=$COVERALLS_REPO_TOKEN
