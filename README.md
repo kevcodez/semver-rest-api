@@ -3,6 +3,8 @@ Spring Boot Service written in Kotlin that offers a REST API for semantic versio
 
 [![Build Status](https://travis-ci.org/kevcodez/semver-rest-api.svg?branch=master)](https://travis-ci.org/kevcodez/semver-rest-api)
 
+[![Coverage Status](https://coveralls.io/repos/github/kevcodez/semver-rest-api/badge.svg)](https://coveralls.io/github/kevcodez/semver-rest-api)
+
 ## Version information
 
 GET /info/2.1.0-beta
