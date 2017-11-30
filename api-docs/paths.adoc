@@ -1,0 +1,322 @@
+
+[[_paths]]
+== Paths
+
+[[_incrementmajorversion_semver_rest_apiusingget]]
+=== Increments major version of the given version.
+....
+GET /increment/major/{version}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**version** +
+__required__|version|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Incremented version.|<<_versiondto,VersionDto>>
+|**400**|Invalid version.|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* increment-controller
+
+
+[[_incrementminorversion_semver_rest_apiusingget]]
+=== Increments minor version of the given version.
+....
+GET /increment/minor/{version}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**version** +
+__required__|version|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Incremented version.|<<_versiondto,VersionDto>>
+|**400**|Invalid version.|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* increment-controller
+
+
+[[_incrementpatchversion_semver_rest_apiusingget]]
+=== Increments patch version of the given version.
+....
+GET /increment/patch/{version}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**version** +
+__required__|version|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Incremented version.|<<_versiondto,VersionDto>>
+|**400**|Invalid version.|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* increment-controller
+
+
+[[_incrementprereleaseversion_semver_rest_apiusingget]]
+=== Increments pre release version of the given version.
+....
+GET /increment/preRelease/{version}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**version** +
+__required__|version|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Incremented version.|<<_versiondto,VersionDto>>
+|**400**|Invalid version.|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* increment-controller
+
+
+[[_getinformation_semver_rest_apiusingget]]
+=== Gets information about the given version.
+....
+GET /info/{version}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**version** +
+__required__|version|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Version information.|<<_versiondto,VersionDto>>
+|**400**|Invalid version.|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* version-info-controller
+
+
+[[_versionsinrange_semver_rest_apiusingpost]]
+=== Validate a list of versions against a version range.
+....
+POST /validate
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**validationRequestDto** +
+__required__|validationRequestDto|<<_validationrequestdto,ValidationRequestDto>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|object
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* validation-controller
+
+
+[[_isversioninrange_semver_rest_apiusingget]]
+=== Validate a single version against a version range.
+....
+GET /validate/{version}/inRange/{versionRange}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**version** +
+__required__|version|string
+|**Path**|**versionRange** +
+__required__|versionRange|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Result, whether the given version is in the given version range.|boolean
+|**400**|Invalid version.|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* validation-controller
+
+
+

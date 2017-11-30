@@ -1,0 +1,39 @@
+
+[[_definitions]]
+== Definitions
+
+[[_validationrequestdto]]
+=== ValidationRequestDto
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**versionRange** +
+__optional__|string
+|**versionsToValidate** +
+__optional__|< string > array
+|===
+
+
+[[_versiondto]]
+=== VersionDto
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**buildMetadata** +
+__optional__|string
+|**major** +
+__optional__|integer (int32)
+|**minor** +
+__optional__|integer (int32)
+|**normal** +
+__optional__|string
+|**patch** +
+__optional__|integer (int32)
+|**preRelease** +
+__optional__|string
+|===
+
+
+
