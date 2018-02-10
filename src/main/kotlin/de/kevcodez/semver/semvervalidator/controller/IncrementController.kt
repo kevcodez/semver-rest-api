@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController
 class IncrementController {
 
     @Autowired
-    lateinit var versionConverter: VersionConverter;
+    private lateinit var versionConverter: VersionConverter
 
     @GetMapping("major/{version:.+}")
     @ApiOperation("Increments major version of the given version.")
@@ -53,14 +53,14 @@ class IncrementController {
     }
 
     private fun incrementVersion(version: String, functionIncrement: (Version) -> Version): ResponseEntity<*> {
-        try {
+        return try {
             val semanticVersion = Version.valueOf(version)
             val incrementedVersion = functionIncrement(semanticVersion)
             val versionDto = versionConverter.convertToDto(incrementedVersion)
 
-            return ResponseEntity.ok(versionDto)
+            ResponseEntity.ok(versionDto)
         } catch (exc: ParseException) {
-            return ResponseEntity(exc.localizedMessage, HttpStatus.BAD_REQUEST)
+            ResponseEntity(exc.localizedMessage, HttpStatus.BAD_REQUEST)
         }
 
     }

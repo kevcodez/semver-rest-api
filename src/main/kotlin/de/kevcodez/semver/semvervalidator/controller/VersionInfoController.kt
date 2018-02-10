@@ -22,19 +22,19 @@ import org.springframework.web.bind.annotation.RestController
 class VersionInfoController {
 
     @Autowired
-    lateinit var versionConverter: VersionConverter;
+    private lateinit var versionConverter: VersionConverter
 
     @GetMapping("{version:.+}")
     @ApiOperation("Gets information about the given version.")
     @ApiResponses(ApiResponse(code = 200, message = "Version information.", response = VersionDto::class), ApiResponse(code = 400, message = "Invalid version."))
     internal fun getInformation(@PathVariable version: String): ResponseEntity<*> {
-        try {
+        return try {
             val semanticVersion = Version.valueOf(version)
             val versionDto = versionConverter.convertToDto(semanticVersion)
 
-            return ResponseEntity(versionDto, HttpStatus.OK)
+            ResponseEntity(versionDto, HttpStatus.OK)
         } catch (exc: ParseException) {
-            return ResponseEntity(exc.localizedMessage, HttpStatus.BAD_REQUEST)
+            ResponseEntity(exc.localizedMessage, HttpStatus.BAD_REQUEST)
         }
     }
 

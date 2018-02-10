@@ -27,7 +27,7 @@ class ValidationControllerTest {
     @Test
     @UseDataProvider("dataIsVersionInRange")
     fun isVersionInRange(version: String, versionRange: String, expectedStatusCode: HttpStatus) {
-        val responseEntity = restTemplate.getForEntity("/validate/${version}/inRange/${versionRange}", Boolean::class.java)
+        val responseEntity = restTemplate.getForEntity("/validate/$version/inRange/$versionRange", Boolean::class.java)
 
         assertThat(responseEntity.statusCode).isEqualTo(expectedStatusCode)
     }
@@ -52,7 +52,7 @@ class ValidationControllerTest {
         val responseEntity = restTemplate.postForEntity("/validate", entity, ValidationResponseDto::class.java)
         assertThat(responseEntity.statusCode).isEqualTo(HttpStatus.OK)
 
-        val validationResponseDto: ValidationResponseDto = responseEntity.getBody()
+        val validationResponseDto: ValidationResponseDto = responseEntity.body
         assertThat(validationResponseDto).isNotNull()
         assertThat(validationResponseDto.versionRange).isEqualTo("^1.0.0")
 
@@ -71,9 +71,9 @@ class ValidationControllerTest {
         @JvmStatic
         fun dataIsVersionInRange(): Array<Array<Any>> {
             return arrayOf(
-                    arrayOf<Any>("1.0.0", "^1.0.0", HttpStatus.OK),
-                    arrayOf<Any>("invalid", "^1.0.0", HttpStatus.BAD_REQUEST),
-                    arrayOf<Any>("1.0.0", "invalid", HttpStatus.BAD_REQUEST)
+                    arrayOf("1.0.0", "^1.0.0", HttpStatus.OK),
+                    arrayOf("invalid", "^1.0.0", HttpStatus.BAD_REQUEST),
+                    arrayOf("1.0.0", "invalid", HttpStatus.BAD_REQUEST)
             )
         }
     }

@@ -6,14 +6,14 @@ import org.junit.Test
 
 class VersionConverterTest {
 
-    private val versionConverter = VersionConverterImpl()
+    private val versionConverter = VersionConverter()
 
     @Test
     fun convertToDto() {
         val version = Version.valueOf("1.0.0-rc.1+build.1")
 
         val versionDto = versionConverter.convertToDto(version)
-        assertEquals(version.majorVersion, versionDto.major)
+        assertEquals(version.majorVersion, versionDto!!.major)
         assertEquals(version.minorVersion, versionDto.minor)
         assertEquals(version.patchVersion, versionDto.patch)
         assertEquals(version.buildMetadata, versionDto.buildMetadata)

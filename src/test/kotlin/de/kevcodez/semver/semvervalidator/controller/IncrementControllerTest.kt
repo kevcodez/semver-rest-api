@@ -1,21 +1,14 @@
 package de.kevcodez.semver.semvervalidator.controller
 
-import com.github.zafarkhaja.semver.Version
 import com.tngtech.java.junit.dataprovider.DataProvider
 import com.tngtech.java.junit.dataprovider.UseDataProvider
 import de.kevcodez.semver.semvervalidator.DataProviderRunnerWithSpring
-import de.kevcodez.semver.semvervalidator.converter.VersionConverter
-import de.kevcodez.semver.semvervalidator.converter.VersionConverterImpl
 import de.kevcodez.semver.semvervalidator.dto.VersionDto
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Matchers.any
-import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 
@@ -26,21 +19,10 @@ class IncrementControllerTest {
     @Autowired
     private lateinit var restTemplate: TestRestTemplate
 
-    @MockBean
-    private lateinit var versionConverter: VersionConverter
-
-    private val versionConverterImpl = VersionConverterImpl()
-
-    @Before
-    fun setup() {
-        `when`(versionConverter.convertToDto(any<Version>()))
-                .thenAnswer { versionConverterImpl.convertToDto(it.getArgumentAt(0, Version::class.java)) }
-    }
-
     @Test
     @UseDataProvider("dataIncrement")
     fun increment(url: String, expectedVersion: String) {
-        val responseEntity = restTemplate.getForEntity("/increment/${url}", VersionDto::class.java)
+        val responseEntity = restTemplate.getForEntity("/increment/$url", VersionDto::class.java)
 
         assertThat(responseEntity.statusCode).isEqualTo(HttpStatus.OK)
         assertThat(responseEntity.body).isNotNull()

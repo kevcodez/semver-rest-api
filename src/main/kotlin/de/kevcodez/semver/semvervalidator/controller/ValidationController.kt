@@ -26,13 +26,13 @@ class ValidationController {
             ApiResponse(code = 400, message = "Invalid version.")
     )
     internal fun isVersionInRange(@PathVariable version: String, @PathVariable versionRange: String): ResponseEntity<*> {
-        try {
+        return try {
             val semanticVersion = Version.valueOf(version)
             val satisfied = semanticVersion.satisfies(versionRange)
 
-            return ResponseEntity(satisfied, HttpStatus.OK)
+            ResponseEntity(satisfied, HttpStatus.OK)
         } catch (exc: ParseException) {
-            return ResponseEntity(exc.localizedMessage, HttpStatus.BAD_REQUEST)
+            ResponseEntity(exc.localizedMessage, HttpStatus.BAD_REQUEST)
         }
     }
 
@@ -42,7 +42,7 @@ class ValidationController {
     internal fun versionsInRange(@Valid @RequestBody validationRequestDto: ValidationRequestDto): ResponseEntity<*> {
         val versionRange = validationRequestDto.versionRange
 
-        val validationResponseDto = ValidationResponseDto(validationRequestDto.versionRange, HashMap<String, Boolean>())
+        val validationResponseDto = ValidationResponseDto(validationRequestDto.versionRange, HashMap())
         validationResponseDto.versionRange = validationRequestDto.versionRange
 
         for (version in validationRequestDto.versionsToValidate) {

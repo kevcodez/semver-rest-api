@@ -5,7 +5,7 @@ class ValidationResponseDto(var versionRange: String, var validatedVersions: Mut
     constructor() : this("", HashMap())
 
     fun addValidation(version: String, isValid: Boolean) {
-        validatedVersions.put(version, isValid);
+        validatedVersions[version] = isValid
     }
 
 }

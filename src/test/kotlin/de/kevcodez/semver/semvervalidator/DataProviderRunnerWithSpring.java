@@ -201,7 +201,7 @@ public class DataProviderRunnerWithSpring extends SpringJUnit4ClassRunner {
      * @return the exploded list of test methods (never {@code null})
      */
     List<FrameworkMethod> generateExplodedTestMethodsFor(List<FrameworkMethod> testMethods) {
-        List<FrameworkMethod> result = new ArrayList<FrameworkMethod>();
+        List<FrameworkMethod> result = new ArrayList<>();
         if (testMethods == null) {
             return result;
         }
