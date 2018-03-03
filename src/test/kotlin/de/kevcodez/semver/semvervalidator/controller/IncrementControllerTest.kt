@@ -25,7 +25,7 @@ class IncrementControllerTest {
         val responseEntity = restTemplate.getForEntity("/increment/$url", VersionDto::class.java)
 
         assertThat(responseEntity.statusCode).isEqualTo(HttpStatus.OK)
-        assertThat(responseEntity.body).isNotNull()
+        assertThat(responseEntity.body).isNotNull
         assertThat(responseEntity.body.normal).isEqualTo(expectedVersion)
     }
 
@@ -42,7 +42,7 @@ class IncrementControllerTest {
         val responseEntity = restTemplate.getForEntity("/increment/preRelease/1.0.0-rc1", VersionDto::class.java)
 
         assertThat(responseEntity.statusCode).isEqualTo(HttpStatus.OK)
-        assertThat(responseEntity.body).isNotNull()
+        assertThat(responseEntity.body).isNotNull
         assertThat(responseEntity.body.preRelease).isEqualTo("rc1.1")
     }
 

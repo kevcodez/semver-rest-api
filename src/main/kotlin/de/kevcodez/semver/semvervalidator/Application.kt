@@ -1,7 +1,8 @@
 package de.kevcodez.semver.semvervalidator
 
-import org.springframework.boot.SpringApplication
+import org.springframework.boot.Banner
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
@@ -25,5 +26,7 @@ open class Application {
 }
 
 fun main(args: Array<String>) {
-    SpringApplication.run(Application::class.java, *args)
+    runApplication<Application>(*args) {
+        setBannerMode(Banner.Mode.LOG)
+    }
 }

@@ -47,7 +47,7 @@ class ValidationControllerTest {
 
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
-        val entity = HttpEntity<String>(requestJson, headers)
+        val entity = HttpEntity(requestJson, headers)
 
         val responseEntity = restTemplate.postForEntity("/validate", entity, ValidationResponseDto::class.java)
         assertThat(responseEntity.statusCode).isEqualTo(HttpStatus.OK)
@@ -62,7 +62,6 @@ class ValidationControllerTest {
         assertThat(validatedVersions).containsEntry("1.1.0", true)
         assertThat(validatedVersions).containsEntry("2.0.0", false)
         assertThat(validatedVersions).containsEntry("invalid", false)
-
     }
 
     companion object {
